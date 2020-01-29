@@ -1,4 +1,4 @@
-############### Section 3 Types and Values ################
+############### Section 3: Types and Values ################
 
 # Example of 'type'
 x = "Hello"
@@ -32,3 +32,21 @@ y = True
 print(f"{x} {y}")
 if y:
     print("Yay")
+
+# Example of Sequence type : List [Created by third bracket and Mutable]
+x = [1, 2, 3, 4, 5]
+print(f"{type(x)}")
+for i in x:
+    print(f"{i}")
+
+# Example of Sequence type : Tuple [Created by first bracket and Immutable]
+x = (1, 2, 3, 4, 5)
+print(f"{type(x)}")
+for i in x:
+    print(f"{i}")
+
+# Example of Sequence type : Dictionary [Created by second bracket and Mutable]
+x = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
+print(f"{type(x)}")
+for k, v in x.items():
+    print("'key' {} 'value' {}".format(k, v))
