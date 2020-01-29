@@ -9,7 +9,6 @@ print(type(x))
 x = "Seven {1} {0}".format(9, 8)
 print(x)
 
-
 # Example of 'f' string [available after python 3.6]
 a = 8
 b = 9
@@ -26,3 +25,10 @@ x = 7 / 3   # Will give us 2.3333333
 y = 7 // 3  # Will give us 2
 z = 7 % 3   # Will give us 1
 print(f"point: {x} \nresult: {y} \nremainder: {z}")
+
+# Example of Boolean type
+x = False
+y = True
+print(f"{x} {y}")
+if y:
+    print("Yay")
