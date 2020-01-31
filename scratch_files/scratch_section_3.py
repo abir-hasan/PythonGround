@@ -51,18 +51,19 @@ print(f"{type(x)}")
 for k, v in x.items():
     print("'key' {} 'value' {}".format(k, v))
 
-# Example of 'is' and 'isinstance'
-# x = (1, 2, 3, 4, 5)
-# y = [1, 2, 3, 4, 5]
-#
-# if x[0] is y[0]:
-#     print("Same")
-# else:
-#     print("Nope")
-#
-# if isinstance(y, tuple):
-#     print("Y is tuple")
-# elif isinstance(y, list):
-#     print("Y is list")
-# else:
-#     print("don't know you are talking about")
+# Example of 'is'(is used determine if two things are equal) and
+# 'isinstance'(is used to get type of the object)
+x = (1, 2, 3, 4, 5)
+y = [1, 2, 3, 4, 5]
+
+if x[0] is y[0]:
+    print("Same")
+else:
+    print("Nope")
+
+if isinstance(y, tuple):
+    print("Y is tuple")
+elif isinstance(y, list):
+    print("Y is list")
+else:
+    print("don't know you are talking about")
