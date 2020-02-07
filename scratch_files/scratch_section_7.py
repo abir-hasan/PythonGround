@@ -56,7 +56,6 @@ def print_sounds(*args):
 
 
 # Example of keyword argument with Dictionary
-
 def start5():
     x = dict(Buffy="meows", Tom="roars", Belgie="barks")
     print_key_value(**x)
@@ -68,6 +67,7 @@ def print_key_value(**kwargs):
             print(f"{k} -> {kwargs[k]}")
 
 
+# Main function which is calling every example
 if __name__ == "__main__":
     start()
     start2()
