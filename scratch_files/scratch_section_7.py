@@ -55,8 +55,22 @@ def print_sounds(*args):
         print("No sound available!")
 
 
+# Example of keyword argument with Dictionary
+
+def start5():
+    x = dict(Buffy="meows", Tom="roars", Belgie="barks")
+    print_key_value(**x)
+
+
+def print_key_value(**kwargs):
+    if len(kwargs):
+        for k in kwargs:
+            print(f"{k} -> {kwargs[k]}")
+
+
 if __name__ == "__main__":
     start()
     start2()
     start3()
     start4()
+    start5()

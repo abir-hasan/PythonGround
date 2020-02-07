@@ -47,6 +47,7 @@ for i in x:
 
 # Example of Sequence type : Dictionary [Created by second bracket and Mutable]
 x = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
+# x = dict(one="1", two="2", three="3", four="4", five="5") # another way to write a dictionary
 print(f"{type(x)}")
 for k, v in x.items():
     print("'key' {} 'value' {}".format(k, v))
