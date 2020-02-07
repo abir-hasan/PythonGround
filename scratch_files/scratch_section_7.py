@@ -42,7 +42,21 @@ def third(a):
     print(f"a: {a}")
 
 
+# Example of argument lists
+def start4():
+    print_sounds("meow", "roar", "purr", "bark")
+
+
+def print_sounds(*args):
+    if len(args):  # Check if the set arguments length is greater than 0
+        for x in args:
+            print(x)
+    else:
+        print("No sound available!")
+
+
 if __name__ == "__main__":
     start()
     start2()
     start3()
+    start4()
