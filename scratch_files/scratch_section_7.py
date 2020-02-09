@@ -67,6 +67,37 @@ def print_key_value(**kwargs):
             print(f"{k} -> {kwargs[k]}")
 
 
+# Example of Generators
+def start6():
+    for i in inclusive_range(5, 30, 3):
+        print(i, end=' ')
+    print("\n---------*----------")
+
+
+def inclusive_range(*args):
+    num_args = len(args)
+    first = 0
+    step = 1
+
+    # Initialize parameters
+    if num_args < 1:
+        raise TypeError(f"expected at least 1 argument, got {num_args}")
+    elif num_args == 1:
+        stop = args[0]
+    elif num_args == 2:
+        (first, stop) = args
+    elif num_args == 3:
+        (first, stop, step) = args
+    else:
+        raise TypeError(f"expected at most 3 arguments, got {num_args}")
+
+    # Generator
+    i = first
+    while i <= stop:
+        yield i  # yield like a return. But it doesn't stop the loop, it simply returns a value then continues to run
+        i += step
+
+
 # Main function which is calling every example
 if __name__ == "__main__":
     start()
@@ -74,3 +105,4 @@ if __name__ == "__main__":
     start3()
     start4()
     start5()
+    start6()
