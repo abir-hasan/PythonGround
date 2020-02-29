@@ -103,6 +103,7 @@ import time
 
 
 def decorator_fun(f):
+    print("Inside the decorator_fun")
     def wrapper():
         print("Inside the wrapper")
         t1 = time.time()
@@ -110,6 +111,7 @@ def decorator_fun(f):
         t2 = time.time()
         print(f"Elapsed time: {(t2 - t1) * 1000} ms")
 
+    print("Getting out of decorator_fun")
     return wrapper
 
 
