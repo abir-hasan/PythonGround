@@ -98,6 +98,29 @@ def inclusive_range(*args):
         i += step
 
 
+# Example of Decorators
+import time
+
+
+def decorator_fun(f):
+    def wrapper():
+        print("Inside the wrapper")
+        t1 = time.time()
+        f()
+        t2 = time.time()
+        print(f"Elapsed time: {(t2 - t1) * 1000} ms")
+
+    return wrapper
+
+
+@decorator_fun
+def start7():
+    num_list = []
+    for i in (range(0, 100000)):
+        num_list.append(i)
+    print(f"Sum: {sum(num_list)}")
+
+
 # Main function which is calling every example
 if __name__ == "__main__":
     start()
@@ -106,3 +129,4 @@ if __name__ == "__main__":
     start4()
     start5()
     start6()
+    start7()
