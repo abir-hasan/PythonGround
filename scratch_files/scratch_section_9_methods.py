@@ -1,5 +1,7 @@
 ############### Section 9: Classes ################
 
+# Methods like str : https://docs.python.org/3/reference/datamodel.html
+
 class Animal:
     def __init__(self, **kwargs):
         self._type = kwargs['type'] if 'type' in kwargs else 'kitten'
