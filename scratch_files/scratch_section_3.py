@@ -45,7 +45,8 @@ print(f"{type(x)}")
 for i in x:
     print(f"{i}")
 
-# Example of Sequence type : Dictionary [Created by second bracket and Mutable]
+# Dictionary: A dictionary object is an unordered collection of data in a key:value pair form.
+# [Created by second bracket and Mutable]
 x = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
 # x = dict(one="1", two="2", three="3", four="4", five="5") # another way to write a dictionary
 print(f"{type(x)}")
