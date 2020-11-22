@@ -1,35 +1,44 @@
 import socket
 
 
-def start_client():
+def start_server():
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    # Connect the socket to the port where the server is listening
+    # Bind the socket to the port
     server_address = ('localhost', 10000)
-    print(f'connecting to port {server_address}')
-    sock.connect(server_address)
+    print(f'starting up on  port  {server_address}')
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    sock.bind(server_address)
 
-    try:
+    # Listen for incoming connections
+    sock.listen(1)
 
-        # Send data
-        message = "1234567890123456"
-        print(f'sending  {message}')
-        sock.sendall(bytes(message, 'utf-8'))
+    while True:
+        # Wait for a connection
+        print('waiting for a connection')
+        connection, client_address = sock.accept()
+        try:
+            print(f'connection from {client_address}')
 
-        # Look for the response
-        amount_received = 0
-        amount_expected = len(message)
+            # Receive the data in small chunks and retransmit it
+            while True:
+                data = connection.recv(16)
+                print(f'received {data}')
+                if data:
+                    print(f'sending data back to the client {type(data)}')
+                    # connection.sendall(bytes("121212", 'utf-8'))
+                    connection.sendall(data)
+                else:
+                    print(f'no more data from {client_address}')
+                    break
 
-        while amount_received < amount_expected:
-            data = sock.recv(16)
-            amount_received += len(data)
-            print(f'received {data}')
-
-    finally:
-        print('Client connection closed')
-        sock.close()
+        finally:
+            # Clean up the connection
+            print('Server Connection Closed')
+            connection.close()
+            break
 
 
 if __name__ == "__main__":
-    start_client()
+    start_server()
