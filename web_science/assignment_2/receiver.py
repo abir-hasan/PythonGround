@@ -13,19 +13,20 @@ def start_server():
 
     # Bind the socket to the port
     server_address = (LOCAL_HOST, CON_PORT)
-    print(f'starting up on  port  {server_address}')
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)  # Using this to reuse same 'server_address'
     sock.bind(server_address)
-
     # Listen for incoming connections
     sock.listen(1)
 
     while True:
         # Wait for a connection
-        print('waiting for a connection')
+        # print('waiting for a connection')
         connection, client_address = sock.accept()
         try:
-            print(f'connection from {client_address}')
+            in_con = client_address[0]
+            in_port = client_address[1]
+            in_server = f"{in_con}:{in_port}"
+            print(f'connection from {in_server}')
 
             # Receive the data in small chunks and retransmit it
             while True:
@@ -34,7 +35,6 @@ def start_server():
                 messages = data[0:4]
                 check_sum = data[4]
                 print(f"Got the following message {messages} and {check_sum} as checksum from the sender")
-                # print(f'received {data}')
                 is_valid = validate_data(messages, check_sum)  # Validate message against checksum
                 if data:
                     if is_valid:
@@ -51,7 +51,6 @@ def start_server():
                     break
         finally:
             # Clean up the connection
-            print('Server Connection Closed')
             connection.close()
             break
 

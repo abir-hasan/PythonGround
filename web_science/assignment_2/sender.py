@@ -19,14 +19,16 @@ def start_client():
 
     # Connect the socket to the port where the server is listening
     server_address = (LOCAL_HOST, CON_PORT)
-    print(f'connected to tmps - {LOCAL_HOST}:{CON_PORT}')
+    print(f'connected to tmps-{LOCAL_HOST}:{CON_PORT}')
     sock.connect(server_address)
 
-    message_list = random.sample(range(0, 256), 4)  # Generating four 8-bit values
+    # Generating four 8-bit values
+    message_list = random.sample(range(0, 256), 4)
 
     check_sum_int = int(calculate_checksum(message_list), 2)
     message_list.append(check_sum_int)
     try:
+        # Send Data to Server
         send_data(sock, message_list)
     finally:
         while True:
@@ -36,7 +38,7 @@ def start_client():
                 break
             else:
                 print(f"Response from the receiver {ack}")
-    print('Client connection closed')
+    # Close Connection
     sock.close()
 
 
