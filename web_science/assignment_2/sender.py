@@ -33,8 +33,8 @@ def start_client():
     finally:
         while True:
             ack = sock.recv(300)
-            ack = ack.decode(ENCODING)
-            if ack == "exit":
+            #ack = ack.decode(ENCODING)
+            if ack == "exit".encode(ENCODING):
                 break
             else:
                 print(f"Response from the receiver {ack}")

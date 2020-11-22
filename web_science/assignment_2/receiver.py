@@ -39,7 +39,7 @@ def start_server():
                 if data:
                     if is_valid:
                         check_sum = bin(check_sum)[2:]  # slicing 0b
-                        final_message = " Receiver Message : Data is correctly received and checksum is "
+                        final_message = "Receiver Message : Data is correctly received and checksum is "
                         final_message += check_sum
                         connection.sendall(bytes(final_message, 'utf-8'))  # Send success message
                     else:
