@@ -7,17 +7,15 @@ initial_sum = "0b00000000"  # same size bit as 'initial_bit_size'
 
 # Method to calculate checksum
 def calculate_checksum(message):
-    var_count = 1
     sum = initial_sum
     for bit in message:
         bin_str = bin(bit)
-        print_variables(bin_str, var_count)
+        print_variables(sum, 1)
+        print_variables(bin_str, 2)
         sum = bin(int(sum, 2) + int(bin_str, 2))
 
-        if var_count > 1:
-            sum = get_sum_wrapped(sum)
-            print_sum(sum)
-        var_count += 1
+        sum = get_sum_wrapped(sum)
+        print_sum(sum)
     cs = print_check_sum(get_formatted_bits(sum))
     return cs
 
@@ -28,13 +26,18 @@ def validate_data(message, check_sum):
     sum = initial_sum
     for bit in message:
         bin_str = bin(bit)
+        print_variables(sum, 1)
+        print_variables(bin_str, 2)
         sum = bin(int(sum, 2) + int(bin_str, 2))
         sum = get_sum_wrapped(sum)
+        print_sum(sum)
     validated_bits = get_formatted_bits(sum)
     if validated_bits == perfect_sum:
-        print("Valid message")
+        print(f"Got the following sum {validated_bits} after the validation")
+        return True
     else:
         print("Corrupted data")
+        return False
 
 
 def print_check_sum(sum):
