@@ -38,9 +38,9 @@ def start_server():
                 is_valid = validate_data(messages, check_sum)  # Validate message against checksum
                 if data:
                     if is_valid:
-                        check_sum = bin(check_sum)[2:]  # slicing 0b
+                        check_sum = bin(check_sum)
                         final_message = "Receiver Message : Data is correctly received and checksum is "
-                        final_message += check_sum
+                        final_message += get_formatted_bits(check_sum)
                         connection.sendall(bytes(final_message, 'utf-8'))  # Send success message
                     else:
                         final_message = "Corrupted data"
