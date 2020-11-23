@@ -35,8 +35,13 @@ def start_client():
 
     # Connect the socket to the port where the server is listening
     server_address = (LOCAL_HOST, CON_PORT)
-    print(f'connected to tmps-{LOCAL_HOST}:{CON_PORT}')
-    sock.connect(server_address)
+    try:
+        sock.connect(server_address)
+        print(f'connected to tmps-{LOCAL_HOST}:{CON_PORT}')
+    except ConnectionRefusedError as e:
+        # print(e)
+        print("Run 'receiver.py' first to start the Server.")
+        return
 
     # Generating four 8-bit random massages
     message_list = random.sample(range(0, 256), 4)
@@ -67,4 +72,4 @@ def send_data(sock, message):
 
 
 if __name__ == "__main__":
-    start_client()
+    start_client()  # Run receiver.py first to start the server

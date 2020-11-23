@@ -73,4 +73,4 @@ def start_server():
 
 
 if __name__ == "__main__":
-    start_server()
+    start_server()  # Run receiver.py first to start the server
