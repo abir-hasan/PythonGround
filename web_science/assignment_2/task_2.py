@@ -117,6 +117,8 @@ def get_formatted_bits(value):
 
 
 if __name__ == "__main__":
+    # # Change Upper Configuration Variables values first to run 16 bit inputs
+    # a = [0b1010101100110101, 0b1100001111010001, 0b0101001000110001, 0b0011000011101101]
     a = [0b01101001, 0b00100000, 0b01101100, 0b01101111]
     calculate_checksum(a)   # Task 2.1.1
     answer_to_task_2_1_2()  # Task 2.1.2
