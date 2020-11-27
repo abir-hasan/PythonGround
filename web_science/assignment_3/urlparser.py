@@ -34,7 +34,10 @@ def find_query(parsed_segments, url):
     try:
         query_last_index = url.index("#")
         temp_query = url[:query_last_index]
-        parsed_segments[QUERY] = temp_query
+        if temp_query == '':
+            parsed_segments[QUERY] = None
+        else:
+            parsed_segments[QUERY] = temp_query
         url = url[query_last_index:]
     except ValueError as e:
         url = None if url == '' else url
@@ -50,9 +53,16 @@ def find_path(parsed_segments, url):
         parsed_segments[PATH] = temp_path
         url = url[path_last_index:]
     except ValueError as e:
-        url = None if url == '' else url
-        parsed_segments[PATH] = url
-        url = ""
+        part = url.split("#")
+        if len(part) > 1:
+            parsed_segments[PATH] = part[0]
+            url = '#' + part[1]
+        else:
+            if url == '':
+                parsed_segments[PATH] = None
+            else:
+                parsed_segments[PATH] = url
+            url = ""
     return url
 
 
@@ -95,6 +105,6 @@ def find_scheme(parsed_segments, url):
 if __name__ == "__main__":
     # parse_url("https://www.facebook.com/photo.php?fbid=2068026323275211&set=a.269104153167446&type=3&theater")  # 1
     # parse_url("http://www.blog.google.uk:1000/path/to/myfile.html?key1=value1&key2=value2#InTheDocument")  # 2
-    parse_url("https://www.overleaf.com/9565720ckjijuhzpbccsd#/347876331/")  # 3 TODO - Path/fragment no query
+    # parse_url("https://www.overleaf.com/9565720ckjijuhzpbccsd#/347876331/")  # 3
     # parse_url("ftp://root@west.uni.koblenz.de")  # 4
-    # parse_url("https://west.uni-koblenz.de/studying/ws2021")  # 5
+    parse_url("https://west.uni-koblenz.de/studying/ws2021")  # 5
