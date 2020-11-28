@@ -43,7 +43,7 @@ def parse_url(url):
     find_fragment(parsed_segments, url)
 
     url_segments = {original_url: parsed_segments}  # Dictionary Containing URL and it's parsed segments
-    print(url_segments)
+    print(f"\n{url_segments}")
     """print("\nIndividual URL Segments:\n")
     for k, v in parsed_segments.items():
         print(f"{k} : {v}")"""
