@@ -1,3 +1,27 @@
+# Web Science Assignment - 3
+# Team - Mike
+# Task 4 - Python Programming
+# 4.1 URL Parser
+#
+# Write a Python script called as urlparser.py. The script parses an url into the segments
+# that are explained in the lecture Internet vs WWW, and additionally extracts top-level
+# domains as one segment. When you execute the script
+# (e.g python -m urlparser https://west.uni-koblenz.de/studying/ws2021) at the command-line, a dictionary
+# containing the url and its segments should be returned. For the optional parts, you may use None values.
+# Take a screenshot of the terminal output of your script for the following URLs
+#
+# 1. https://www.facebook.com/photo.php?fbid=2068026323275211&set=a.269104153167446&
+#    type=3&theater
+# 2. http://www.blog.google.uk:1000/path/to/myfile.html?key1=value1&key2=value2#
+#    InTheDocument
+# 3. https://www.overleaf.com/9565720ckjijuhzpbccsd#/347876331/
+# 4. ftp://root@west.uni.koblenz.de
+# 5. https://west.uni-koblenz.de/studying/ws2021
+#
+# You are not allowed to use any specific libraries that help in url parsing and regular expressions.
+
+import sys
+
 SCHEME = "scheme"
 USER_INFO = "userinfo"  # Optional
 HOST = "host"
@@ -18,11 +42,12 @@ def parse_url(url):
     url = find_query(parsed_segments, url)
     find_fragment(parsed_segments, url)
 
-    # print(url)
-    print(parsed_segments)
-    print(original_url)
+    url_segments = {original_url: parsed_segments}  # Dictionary Containing URL and it's parsed segments
+    print(url_segments)
+    """print("\nIndividual URL Segments:\n")
     for k, v in parsed_segments.items():
-        print(f"{k} : {v}")
+        print(f"{k} : {v}")"""
+    return url_segments
 
 
 def find_fragment(parsed_segments, url):
@@ -92,6 +117,9 @@ def host_parts(parse_segments, host):
         parse_segments[PORT] = part[1]
     else:
         parse_segments[PORT] = None
+    tld = host.split(".")
+    tld = tld[len(tld) - 1]
+    parse_segments[TLD] = tld
     parse_segments[HOST] = host
 
 
@@ -103,8 +131,22 @@ def find_scheme(parsed_segments, url):
 
 
 if __name__ == "__main__":
+    input_url = ""
+    arg_len = len(sys.argv)
+
+    if arg_len > 1:
+        # Needs at-least 2 arguments for terminal.
+        # first is the script name, second is the URL
+        input_url = sys.argv[arg_len - 1]  # Last argument is the URL
+    else:
+        # Run program through console and take input
+        input_url = input()
+
+    # Run Parser
+    parse_url(input_url)
+
     # parse_url("https://www.facebook.com/photo.php?fbid=2068026323275211&set=a.269104153167446&type=3&theater")  # 1
     # parse_url("http://www.blog.google.uk:1000/path/to/myfile.html?key1=value1&key2=value2#InTheDocument")  # 2
     # parse_url("https://www.overleaf.com/9565720ckjijuhzpbccsd#/347876331/")  # 3
     # parse_url("ftp://root@west.uni.koblenz.de")  # 4
-    parse_url("https://west.uni-koblenz.de/studying/ws2021")  # 5
+    # parse_url("https://west.uni-koblenz.de/studying/ws2021")  # 5
