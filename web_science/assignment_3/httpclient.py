@@ -13,12 +13,13 @@
 # (2) explain briefly why does the website respond with that code?
 
 import socket
+import sys
 
 from urlparser import *
 
 
 def make_http_request(url):
-    url_segments = parse_url(url)
+    url_segments = parse_url(url)  # Parse the URL to it's segments
     parsed_url = url_segments[url]
     scheme = parsed_url['scheme']
     host = parsed_url['host']
@@ -29,8 +30,7 @@ def make_http_request(url):
     port = 80 if port == None else port
     path = '' if path == None else path
 
-    print(f"host [{host}] port [{port}] path [{path}]\n")
-
+    # Creating the 'request' to send
     request = f"GET {path}/ HTTP/1.1\r\nHost: {host}\r\nConnection: close\r\n\r\n"
     request = request.encode('utf-8')
 
@@ -39,20 +39,58 @@ def make_http_request(url):
     server_address = (host, port)
 
     try:
-        sock.connect(server_address)
-        sock.sendall(request)
-        result = sock.recv(4096)
+        sock.connect(server_address)  # Establish Connection
+        sock.sendall(request)  # Send Request
+        result = sock.recv(4096)  # Receive response
+        data = ""
         while len(result) > 0:
-            print(result.decode("utf-8"))
+            data = result.decode("utf-8")
             result = sock.recv(4096)
+
+        body = print_header_and_save(data)  # Print header and save
+        write_response(body)  # Write rest of the response on drive
         sock.close()
     except Exception as e:
         print(e)
         sock.close()
 
 
+def write_response(data):
+    # print(type(data))
+    body = ""
+    for i in data:
+        body += f"<{i}"
+    # print(body)
+    html_file = open("index.html", "w")
+    html_file.write(body)
+    html_file.close()
+
+
+def print_header_and_save(data):
+    parts = data.split("<")
+    header = parts[0]
+    print(f"\n{header}")
+    header_file = open("header.txt", "w")
+    header_file.write(header)
+    header_file.close()
+    return parts[1:]  # return body without the header
+
+
 if __name__ == "__main__":
-    print("hello")
-    make_http_request("https://west.uni-koblenz.de/research/projects")
+    input_url = ""
+    arg_len = len(sys.argv)
+
+    if arg_len > 1:
+        # Needs at-least 2 arguments for terminal.
+        # first is the script name, second is the URL
+        input_url = sys.argv[arg_len - 1]  # Last argument is the URL
+    else:
+        # Run program through console and take input
+        input_url = input()
+
+    # Make HTTP Request
+    make_http_request(input_url.strip())
+
     # make_http_request("http://example.com")
     # make_http_request("http://example.com/test.html")
+    # make_http_request("https://west.uni-koblenz.de/research/projects")
