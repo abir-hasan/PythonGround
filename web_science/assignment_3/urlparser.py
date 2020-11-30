@@ -37,10 +37,10 @@ def parse_url(url):
     original_url = url
     parsed_segments = {}
     url = find_scheme(parsed_segments, url)  # Find Scheme From URL
-    url = find_host(parsed_segments, url)
-    url = find_path(parsed_segments, url)
-    url = find_query(parsed_segments, url)
-    find_fragment(parsed_segments, url)
+    url = find_host(parsed_segments, url)  # Find Host From URL
+    url = find_path(parsed_segments, url)  # Find Path From URL
+    url = find_query(parsed_segments, url)  # Find Query From URL
+    find_fragment(parsed_segments, url)  # Find Fragment From URL
 
     url_segments = {original_url: parsed_segments}  # Dictionary Containing URL and it's parsed segments
     print(f"\n{url_segments}")
@@ -117,7 +117,7 @@ def host_parts(parse_segments, host):
         parse_segments[PORT] = part[1]
     else:
         parse_segments[PORT] = None
-    tld = host.split(".")
+    tld = host.split(".")  # Parsing Top Level Domain in Host
     tld = tld[len(tld) - 1]
     parse_segments[TLD] = tld
     parse_segments[HOST] = host
