@@ -1,0 +1,8 @@
+Husam, sam@gmail.com,
+Halle, halle@airbnb.com,
+Rajesh, raj@gmail.com
+Dev, dev@gmail.com,
+Audrey, audrey_burton@gmail.com,
+Peter, pete@gmail.com,
+Korok, korok@yahoo.com
+Ipek, dummy@gmail.com'); DROP TABLE clients; --; INSERT INTO clients VALUES (Kenneth, dummy2@mail.com
