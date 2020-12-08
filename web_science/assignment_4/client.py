@@ -41,8 +41,6 @@ def read_file(file_path):
             contact_name_email.append(name_email[0].strip())
             contact_name_email.append(name_email[1].strip())
             contact_list.append(contact_name_email)
-        # print(data)
-        # print(contact_list)
     return contact_list
 
 
@@ -58,7 +56,6 @@ def parse_response(response):
     result = re.findall('>(.*)</', response)
     message = result[0]  # Server response message
     size = result[1]  # Current DB Entry Size
-    # print(f"size: {size} message: {message}")
     return size, message
 
 
@@ -72,7 +69,6 @@ def plot_timeline(list_sizes, output_file):
 
 def plot_bar(success_count, error_count, output_file):
     plt.close()
-    # print(f"{success_count} {error_count}")
     title_list = ["success", "error"]
     title_count = [success_count, error_count]
     plt.bar(title_list, title_count)
@@ -91,9 +87,8 @@ if __name__ == '__main__':
     else:
         # Run program through console and take input
         fname = input()
+
     contacts = read_file(fname)
-    # contacts = read_file("contacts.txt")
-    # contacts = read_file("alternate_contacts.txt")
     list_sizes = []
     success_count = 0
     error_count = 0
@@ -108,7 +103,6 @@ if __name__ == '__main__':
         else:
             error_count += 1
     total_request = len(contacts)
-    # print(list_sizes)
     assert error_count + success_count == total_request
     plot_timeline(list_sizes, output_file="list_size_timeline.png")
     plot_bar(success_count, error_count, output_file="results.png")
